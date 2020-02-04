@@ -38,10 +38,8 @@ stages:
         tags: |
           $(tag)
 
-
-
-- task: AzureKeyVault@1
-  inputs:
-    azureSubscription: 'Free Trial(7e335fc8-1840-40ef-8568-453bb88f8afe)'
-    KeyVaultName: 'TenablecsdemoGeoffKey'
-    SecretsFilter: '*'
+    - task: AzureKeyVault@1
+    inputs:
+      azureSubscription: 'Free Trial(7e335fc8-1840-40ef-8568-453bb88f8afe)'
+      KeyVaultName: 'TenablecsdemoGeoffKey'
+      SecretsFilter: '*'
