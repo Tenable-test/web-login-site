@@ -21,7 +21,7 @@ variables:
 
 stages:
 - stage: Build
-  displayName: Build and push stage
+  displayName: Build
   jobs:  
   - job: Build
     displayName: Build
@@ -29,11 +29,16 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Buildan image to container registry
       inputs:
-        command: buildAndPush
+        command: build
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'Free Trial(7e335fc8-1840-40ef-8568-453bb88f8afe)'
+    KeyVaultName: 'TenablecsdemoGeoffKey'
+    SecretsFilter: '*'
